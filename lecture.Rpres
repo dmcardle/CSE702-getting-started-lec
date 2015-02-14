@@ -1,0 +1,41 @@
+Getting Started with MATSim and R
+========================================================
+author: Dan McArdle and Abhijit Pattanaik
+date: Feb. 15, 2015
+
+Compiling MATSim
+========================================================
+
+MATSim uses Subversion for version control and Maven 2 for compilation.
+
+<small style="font-size:.7em; width:100%">
+```
+$ # to get the code 
+$ svn co https://svn.code.sf.net/p/matsim/source/matsim/trunk matsim
+$
+$ # to compile
+$ mvn install -DskipTests=true
+```
+</small>
+
+
+Prerequisites
+========================================================
+Before being able to execute the two previous commands (`svn` and `mvn`), we need to install both **Subversion** and **Maven 2**.
+
+This class also requires **R** and **R Studio**.
+
+Two options:
+
+1. Use our Vagrant configuration (this should be really simple)
+2. Install manually on your machine or a virtual machine
+
+
+Using Vagrant
+========================================================
+
+1. Install [VirtualBox](https://www.virtualbox.org/)
+2. Install [Vagrant](http://www.vagrantup.com/downloads)
+3. Download our [`Vagrantfile`](https://gist.github.com/dmcardle/a54a2c41c13ddf9f610f) (click the "Raw" button)
+4. Run "`vagrant up`" from your terminal
+

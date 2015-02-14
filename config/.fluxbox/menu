@@ -1,0 +1,7 @@
+[begin] (fluxbox)
+[nop] (CSE 702 Programs:)
+[exec] (  R Studio) {/usr/bin/rstudio}
+[exec] (  xterm) {/usr/bin/xterm}
+[nop]
+[include] (/etc/X11/fluxbox/fluxbox-menu)
+[end]

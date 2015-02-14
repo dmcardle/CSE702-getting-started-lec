@@ -93,9 +93,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 SCRIPT
 
   $nonrootscript = <<SCRIPT
-
-  git clone https://github.com/dmcardle/CSE702-getting-started-lec.git
-  cp CSE702-getting-started-lec/config/* .
+  cp -r /vagrant_data/config/.fluxbox ~/
+  cp -r /vagrant_data/config/.xinitrc ~/
   
   svn co https://svn.code.sf.net/p/matsim/source/matsim/trunk matsim
   cd matsim

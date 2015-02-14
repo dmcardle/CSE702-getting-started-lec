@@ -34,8 +34,108 @@ Two options:
 Using Vagrant
 ========================================================
 
+## Set up the VM
+
 1. Install [VirtualBox](https://www.virtualbox.org/)
 2. Install [Vagrant](http://www.vagrantup.com/downloads)
-3. Download our [`Vagrantfile`](https://gist.github.com/dmcardle/a54a2c41c13ddf9f610f) (click the "Raw" button)
+3. Download our [`Vagrantfile`](https://gist.github.com/dmcardle/a54a2c41c13ddf9f610f) <br/>
+<small>(click the "Raw" button to download)</small>
 4. Run "`vagrant up`" from your terminal
+
+***
+
+## Use the VM
+
+1. Log in at the prompt (username and password are both "vagrant")
+2. Type `startx` at the prompt to begin the X11 windowing session
+
+Using Vagrant
+========================================================
+
+![alt text](img/all_set_up.png)
+
+Introduction to R
+=================
+
+```{r}
+# Assignment operator
+x <- 10
+
+# Print function
+print(x)
+```
+
+
+Useful R Functions
+================
+
+```{r,eval=FALSE}
+help(someFunc)     # display help page
+example(someFunc)  # show only examples
+
+sd(someVector)     # compute standard deviation
+mean(someVector)   # mean
+median(someVector) # median
+```
+
+Note that these are functions that take a function as a parameter. They are higher-order functions!
+
+Data Types
+===========
+
+```{r}
+# Vector
+v <- c(1, 2, 3)
+print(v)
+# Matrix
+rows <- 2
+cols <- 4
+m <- matrix(1, rows, cols)
+print(m)
+```
+
+Indexing (it begins with 1)
+==========
+
+```{r}
+m <- matrix(1:9, 3, 3) 
+print(m)
+print( m[2,3] )
+print( m[2,] )
+```
+
+Plotting
+========
+
+```{r}
+xs <- seq(0, 2*pi, 0.1)
+ys <- sin(xs)
+plot(xs, ys)
+```
+***
+
+```{r}
+# volcano is a predefined matrix
+image(volcano)
+```
+
+Plotting
+========
+
+```{r}
+m <- seq(0, 2*pi, 0.01)
+m <- m[1:625]
+dim(m) <- c(25,25)
+m <- sin(m)
+image(m) # heat map
+```
+*** 
+```{r}
+persp(m, theta=80, phi=30)
+```
+
+
+
+Control Flow
+============
 

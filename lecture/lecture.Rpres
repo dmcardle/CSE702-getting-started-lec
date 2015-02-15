@@ -38,9 +38,8 @@ Using Vagrant
 
 1. Install [VirtualBox](https://www.virtualbox.org/)
 2. Install [Vagrant](http://www.vagrantup.com/downloads)
-3. Download our [`Vagrantfile`](https://gist.github.com/dmcardle/a54a2c41c13ddf9f610f) <br/>
-<small>(click the "Raw" button to download)</small>
-4. Run "`vagrant up`" from your terminal
+3. Clone or Download our [Github Repository](https://github.com/dmcardle/CSE702-getting-started-lec)
+4. Go to the directory and run "`vagrant up`" from your terminal
 
 ***
 
@@ -49,10 +48,64 @@ Using Vagrant
 1. Log in at the prompt (username and password are both "vagrant")
 2. Type `startx` at the prompt to begin the X11 windowing session
 
-Using Vagrant
+When Vagrant is Done...
 ========================================================
+left: 80%
 
 ![alt text](img/all_set_up.png)
+***
+
+(Right click on the desktop for a menu.)
+
+A Note about Our VM
+===============
+
+If the default settings are too minimal for you, you might want to install Lubuntu Desktop.
+
+```
+# adjust to your liking:
+sudo apt-get install --no-install-recommends \
+   lubuntu-desktop
+
+sudo service lightdm start
+```
+
+A Simple MATSim Example
+=======================
+<small style="font-size:0.7em; width:100%">
+```
+# Download MATSim (already done by Vagrant)
+$ svn co https://svn.code.sf.net/p/matsim/source/matsim/trunk matsim
+$ cd matsim
+
+# Compile
+$ mvn install -DskipTests=true
+
+# Run an example
+$ export MAVEN_OPTS=-Xmx200m
+$ mvn exec:java -Dexec.mainClass="org.matsim.run.Controler" \
+   -Dexec.args="examples/tutorial/config/example5-config.xml"
+```
+</small>
+
+A Simple MATSim Example
+=======================
+
+The results are put into `/output/example5/`.
+
+We can parse any of the output XML files in R.
+
+```{r,eval=FALSE}
+require(XML) # import the XML library
+
+data <- xmlParse("filename.xml")
+xml_data <- xmlToList(data)
+```
+
+A Nontrivial MATSim Example
+===========================
+
+
 
 Introduction to R
 =================

@@ -90,6 +90,17 @@ You can connect via SSH to the VM with the following command.
 vagrant ssh
 ```
 
+Useful Vagrant Commands
+=======================
+class:small-code
+
+```
+vagrant up      # creates a new VM from the file
+vagrant halt    # shuts down the running VM
+vagrant ssh     # connects to the running VM via ssh
+vagrant destroy # remove all traces of the VM
+```
+
 
 A Simple MATSim Example
 =======================

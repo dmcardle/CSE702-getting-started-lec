@@ -78,6 +78,19 @@ sudo apt-get install --no-install-recommends \
 sudo service lightdm start
 ```
 
+Another Option
+==============
+
+Vagrant automatically syncs the directory containing the `Vagrantfile` with `/vagrant_data/` on the VM's filesystem.
+
+This means you can run R/RStudio locally and just MATSim from the VM.
+
+You can connect via SSH to the VM with the following command.
+```
+vagrant ssh
+```
+
+
 A Simple MATSim Example
 =======================
 class: small-code

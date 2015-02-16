@@ -233,7 +233,8 @@ Public Transport Simulation: Configuration
 
 Introduction to R
 =================
-
+ A Programming Environment for Data Analysis and Graphics.
+ 
 ```{r}
 # Assignment operator
 x <- 10
@@ -281,7 +282,19 @@ print( m[2,3] )
 print( m[2,] )
 ```
 
-Plotting
+Data Frame
+==========
+
+Some of the data structures will be deeply tied to each other.
+
+Solution:
+```{r}
+weights <- c(300, 200, 100, 250, 150)
+prices <- c(9000, 5000, 12000, 7500, 18000)
+treasure <- data.frame(weights, prices)
+```
+
+Plotting(yet so simple)
 ========
 
 ```{r}
@@ -311,8 +324,70 @@ image(m) # heat map
 persp(m, theta=80, phi=30)
 ```
 
+XML Parsing with R
+========================================================
+
+- Package in R.
+  
+  Packages are collections of R functions, data, and compiled code in a well defined format.
+- For parsing XML, R provides a package named "XML".
+  
+  This package provides many approaches for both reading and creating XML (and HTML) documents (including DTDs), both local and accessible via HTTP or FTP. 
 
 
-Control Flow
-============
+XML Parsing with R(contd..)
+========================================================
+- Functions in the XML package.
 
+  This collection of functions allow us to add, remove and replace children from an XML node and also to and and remove attributes on an XML node. These are generic functions that work on both internal C-level XMLInternalElementNode objects and regular R-level XMLNode objects.
+
+- Multiple ways of parsing an XML.
+
+  Tree/DOM-based parsing  - Small to moderate files
+  SAX & Event-driven parsing - Large xml files
+
+Steps involved in XML parsing
+========================================================
+
+```{r}
+# install and load the necessary package
+if (!require("XML")) {
+install.packages("XML",repos="http://cran.rstudio.com/bin/")
+library(XML)
+}
+# Save the URL of the xml file in a variable
+xml.url <- "http://svn.code.sf.net/p/matsim/source/matsimExamples/tutorial/lesson-3/network.xml"
+
+# Use the xmlTreePares-function to parse xml file directly from the web
+xmlfile <- xmlTreeParse(xml.url)
+
+# the xml file is now saved as an object you can easily work with in R:
+class(xmlfile)
+
+
+```
+
+Steps involved in XML parsing(contd..)
+========================================================
+
+```{r}
+# Use the xmlRoot-function to access the top node
+xmltop = xmlRoot(xmlfile)
+
+# have a look at the XML-code of the first subnodes:
+print(xmltop)[1:2]
+
+```
+
+References
+========================================================
+
+http://www.matsim.org/quickstart
+http://www.matsim.org/docs/tutorials/8lessons
+
+http://tryr.codeschool.com/
+
+XML Parsing using R:
+www.omegahat.org/RSXML/shortIntro.pdf
+
+http://cran.r-project.org/web/packages/XML/XML.pdf

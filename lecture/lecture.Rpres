@@ -394,6 +394,7 @@ XML Parsing with R(contd..)
 
 Steps involved in XML parsing
 ========================================================
+class:small-code
 
 ```{r}
 # install and load the necessary package
@@ -415,13 +416,14 @@ class(xmlfile)
 
 Steps involved in XML parsing(contd..)
 ========================================================
+class:small-code
 
 ```{r}
 # Use the xmlRoot-function to access the top node
 xmltop = xmlRoot(xmlfile)
 
 # have a look at the XML-code of the first subnodes:
-print(xmltop)[1:2]
+print(xmltop[1:2])
 
 ```
 

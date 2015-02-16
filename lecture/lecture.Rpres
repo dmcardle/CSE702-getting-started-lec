@@ -1,3 +1,9 @@
+<style type="text/css">
+.small-code pre code {
+   font-size: 1.1em;
+}
+</style>
+
 Getting Started with MATSim and R
 ========================================================
 author: Dan McArdle and Abhijit Pattanaik
@@ -5,10 +11,10 @@ date: Feb. 15, 2015
 
 Compiling MATSim
 ========================================================
+class: small-code
 
 MATSim uses Subversion for version control and Maven 2 for compilation.
 
-<small style="font-size:.7em; width:100%">
 ```
 $ # to get the code 
 $ svn co https://svn.code.sf.net/p/matsim/source/matsim/trunk matsim
@@ -16,7 +22,6 @@ $
 $ # to compile
 $ mvn install -DskipTests=true
 ```
-</small>
 
 
 Prerequisites
@@ -72,7 +77,7 @@ sudo service lightdm start
 
 A Simple MATSim Example
 =======================
-<small style="font-size:0.7em; width:100%">
+class: small-code
 ```
 # Download MATSim (already done by Vagrant)
 $ svn co https://svn.code.sf.net/p/matsim/source/matsim/trunk matsim
@@ -86,7 +91,7 @@ $ export MAVEN_OPTS=-Xmx200m
 $ mvn exec:java -Dexec.mainClass="org.matsim.run.Controler" \
    -Dexec.args="examples/tutorial/config/example5-config.xml"
 ```
-</small>
+
 
 A Simple MATSim Example
 =======================
@@ -104,8 +109,128 @@ xml_data <- xmlToList(data)
 
 A Nontrivial MATSim Example
 ===========================
+class: small-code
+Simulation of Public Transport: [Link to Tutorial](http://www.matsim.org/docs/tutorials/transit)
 
+```
+svn checkout \
+  svn://svn.code.sf.net/p/matsim/source/matsim/trunk/examples/pt-tutorial pt-tutorial
+```
 
+Components of Simulation
+-------------------------
+
+1. Network of links public transport vehicles can use
+2. Public transport vehicles
+3. Public transport schedule
+4. Configuration
+
+Public Transport Simulation: Network
+===========================
+class: small-code
+
+Each network **link** has a list of transport **modes**.
+
+```
+...
+<links capperiod="1:00:00">
+
+  <link id="1" from="1" to="2" length="1000.00" capacity="2000" freespeed="12" permlanes="1" modes="car" />
+  
+  <link id="101" from="101" to="102" length="1000.00" capacity="2000" freespeed="12" permlanes="1" modes="bus" />
+  
+  <link id="201" from="201" to="202" length="1000.00" capacity="2000" freespeed="12" permlanes="1" modes="train" />
+  
+  <link id="301" from="301" to="302" length="1000.00" capacity="2000" freespeed="12" permlanes="1" modes="bus,tram" />
+  ...
+```
+
+Public Transport Simulation: Vehicles
+===========================
+class: small-code
+Description of vehicles has two parts
+- Definition of vehicle type
+  - how many passengers?
+  - geometry details
+- Definition of individual vehicles
+
+```
+<vehicleType id="1">
+  <description>Small Train</description>
+  <capacity>
+    <seats persons="50"/>
+    <standingRoom persons="30"/>
+  </capacity>
+  <length meter="50.0"/>
+</vehicleType>
+<vehicle id="tr_1" type="1"/>
+<vehicle id="tr_2" type="1"/> 
+```
+
+Public Transport Simulation: Schedule
+===========================
+class: small-code
+
+Define stop locations
+    - **coordinate**, **identifier**, **link reference**
+
+```
+<transitStops>
+  <stopFacility id="1" x="1050" y="1050" linkRefId= "11"/>
+  <stopFacility id="2" x="2050" y="2940" linkRefId= "24"/>
+  ...
+```
+
+A stop facility may only be reached by vehicles driving on the specified link.
+
+Public Transport Simulation: Schedule
+===========================
+class: small-code
+
+The `isBlocking` attribute of a `stopFacility` defines whether or not a vehicle blocks vehicles behind it from moving forward.
+
+The tutorial notes that this is useful for distinguishing bus stops with individual bays from those without.
+
+```
+<transitStops>
+  <stopFacility id="1" x="1050" y="1050" linkRefId= "11" name="2nd Street" isBlocking="true" />
+  <stopFacility id="2" x="2050" y="2940" linkRefId= "24" name="Main station" isBlocking="false" />
+  ...
+```
+
+Public Transport Simulation: Schedule
+===========================
+class: small-code
+
+```
+<transitLine id="Blue Line">
+  <transitRoute id="1to3">
+    <transportMode>train</transportMode>
+    <routeProfile>
+      <stop refId="1" departureOffset="00:00:00"/>
+      <stop refId="2" arrivalOffset="00:03:20" departureOffset="00:04:00"/>
+      <stop refId="3" arrivalOffset="00:07:20" departureOffset="00:10:00" awaitDeparture="true"/>
+      ...
+      <stop refId="n" arrivalOffset="00:28:00" />
+    </routeProfile>
+    <route>
+      <link refId="11"/>
+      <link refId="398"/>
+      <link refId="24"/>
+      ...
+      <link refId="130"/>
+    </route>
+    <departures>
+      <departure id="01" departureTime="06:00:00" vehicleRefId="tr_1" />
+      <departure id="02" departureTime="06:15:00" vehicleRefId="tr_2" />
+      ...
+    </departures>
+  </transitRoute>
+</transitLine>
+```
+
+Public Transport Simulation: Configuration
+===========================
 
 Introduction to R
 =================

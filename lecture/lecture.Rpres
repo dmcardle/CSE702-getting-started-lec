@@ -243,6 +243,39 @@ class: small-code
 
 Public Transport Simulation: Configuration
 ===========================
+class:small-code
+
+You must explicitly enable public transport simulation in the config.
+
+```
+<module name="scenario">
+  <param name="useTransit" value="true" />
+  <param name="useVehicles" value="true" />
+</module>
+```
+
+You also need to choose a simulator that supports public transit: **QSim**.
+
+```
+<module name="qsim">
+  <param name="startTime" value="00:00:00" />
+  <param name="endTime" value="30:00:00" />
+</module>
+```
+
+
+Running the Public Transport Simulation
+=======================================
+
+Running the simulation simply relies on the `config.xml` file.
+
+```
+mvn exec:java \
+-Dexec.mainClass="org.matsim.run.Controler" \
+-Dexec.args="examples/pt-tutorial/config.xml"
+```
+
+
 
 Introduction to R
 =================

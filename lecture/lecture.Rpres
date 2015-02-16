@@ -2,6 +2,9 @@
 .small-code pre code {
    font-size: 1.1em;
 }
+.tiny-code pre code {
+   font-size: 0.8em;
+}
 </style>
 
 Getting Started with MATSim and R
@@ -96,16 +99,12 @@ $ mvn exec:java -Dexec.mainClass="org.matsim.run.Controler" \
 A Simple MATSim Example
 =======================
 
+The network specified by `example5-config.xml` looks like this.
+
+![alt text](img/example_5_network.png)
+
 The results are put into `/output/example5/`.
 
-We can parse any of the output XML files in R.
-
-```{r,eval=FALSE}
-require(XML) # import the XML library
-
-data <- xmlParse("filename.xml")
-xml_data <- xmlToList(data)
-```
 
 A Nontrivial MATSim Example
 ===========================

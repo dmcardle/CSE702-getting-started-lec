@@ -157,6 +157,11 @@ Each network **link** has a list of transport **modes**.
   ...
 ```
 
+Public Transport Simulation: Network
+====================================
+
+![network](img/multimodalnetwork.png)
+
 Public Transport Simulation: Vehicles
 ===========================
 class: small-code

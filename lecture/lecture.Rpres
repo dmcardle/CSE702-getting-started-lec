@@ -423,7 +423,7 @@ Steps involved in XML parsing(contd..)
 ========================================================
 class:small-code
 
-```{r}
+```{r, eval=F}
 # Use the xmlRoot-function to access the top node
 xmltop = xmlRoot(xmlfile)
 
